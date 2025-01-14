@@ -1,0 +1,16 @@
+
+Yb    dP 8    8 8    8b  8 8888 888b.    db    888b. 8    8888 
+ Yb  dP  8    8 8    8Ybm8 8www 8  .8   dPYb   8wwwP 8    8www 
+  YbdP   8b..d8 8    8  "8 8    8wwK'  dPwwYb  8   b 8    8    
+   YP    `Y88P' 8888 8   8 8888 8  Yb dP    Yb 888P' 8888 8888 
+                                                               
+|> ATTENTION <|
+This container contains a vulnerable, unpatched version of bash (4.1.1).
+This should never, ever be used for anything else than research into the SHELLSHOCK vulnerability.
+
+CVEs:
+  - CVE-2014-6271
+  - CVE-2014-7169
+  - CVE-2014-7186
+  - CVE-2014-7186
+

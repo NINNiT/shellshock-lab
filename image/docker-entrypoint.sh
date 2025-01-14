@@ -1,19 +1,27 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
+if [ ! -d /run/openrc ]; then
+	mkdir -p /run/openrc
+	touch /run/openrc/softlevel
+fi
+
+openrc default
+rc-service sshd start
+rc-service apache2 start
+
 # Shellshock self-check
 if ! env 'x=() { :;}; echo VULNERABLE' bash -c "echo TEST" 2>/dev/null | grep -q 'VULNERABLE'; then
 	echo "ERROR: This shell is NOT vulnerable to Shellshock. Exiting." >&2
 	exit 1
 fi
 
-# first arg is `-f` or `--some-option`
-# or there are no args
-if [ "$#" -eq 0 ] || [ "${1#-}" != "$1" ]; then
-	# docker run bash -c 'echo hi'
-	cat /etc/motd
-	exec bash "$@"
-fi
-
+# Show the MOTD
 cat /etc/motd
-exec "$@"
+
+# Execute the given command or start a bash shell if no command is provided
+if [ "$#" -eq 0 ] || [ "${1#-}" != "$1" ]; then
+	exec bash "$@"
+else
+	exec "$@"
+fi

@@ -4,7 +4,32 @@ This is a playground to investigate and emulate the infamous `shellshock` vulner
 
 ## About Shellshock
 
-// TODO
+`https://en.wikipedia.org/wiki/Shellshock_(software_bug)`
+
+Shellshock is a critical vulnerability discovered in older versions of the Bash shell. It allows attackers to execute arbitrary commands by injecting malicious code 
+into specially crafted environment variables. The vulnerability occurs during the initialization of a new Bash process, 
+where Bash improperly processes function definitions within environment variables.
+
+```bash
+env x='() { :;}; echo vulnerable!' bash -c ""
+```
+In vulnerable Bash versions, the above command will execute echo vulnerable! because Bash misinterprets additional code after the function definition.
+
+### CVE identifiers
+
+- CVE-2014-6271 (initial),
+- CVE-2014-6277,
+- CVE-2014-6278,
+- CVE-2014-7169,
+- CVE-2014-7186,
+- CVE-2014-7187
+
+### Key impacts
+
+- Shellshock is dangerous because environment variables can be passed to Bash from external sources, such as web servers (via CGI scripts), SSH, or other services.
+- Attackers can use this to compromise systems and execute arbitrary commands.
+
+
 
 ## Repo Content
 
